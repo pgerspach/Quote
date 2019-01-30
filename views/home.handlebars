@@ -1,0 +1,87 @@
+<header class="page_header flex-row">
+  <h1 class="page_title">Quote</h1>
+  <input class="search-bar" placeholder="Search" />
+  <div class="navigations">
+    <i class="fa fa-quote-left icon-new-quote" aria-hidden="true"></i>
+    <i class="fa fa-user icon-profile" aria-hidden="true"></i>
+    <i class="fa fa-cog icon-settings" aria-hidden="true"></i>
+  </div>
+</header>
+<div class="new-quote-modal">
+  <div class="new-quote-close">
+    <i class="fa fa-times" aria-hidden="true"></i>
+  </div>
+  <div class="flex-row new-quote modal-head">
+    <span>Quote somebody!</span>
+  </div>
+  <div class="new-quote modal-body flex-column">
+    <label>Author</label>
+    <input class = "new-quote quote-author"name="newQuoteAuthor" placeholder="Author name">
+    <label>Quote</label>
+    <textarea class = "new-quote quote-text"name="newQuoteText" placeholder="Quote"></textarea>
+    <div class = "new-quote quote-submit">Submit quote!</div>
+  </div>
+</div>
+<section class="page">
+
+  <div class="container flex-row">
+    <section class="container-left flex-column">
+      <div class="profile-snapshot flex-column">
+        <div class="profile-snapshot-cover-image">
+          <img class="cover-image-img" src="assets/images/aboutBack.jpg" />
+        </div>
+        <div class="profile-snapshot-profile-image">
+          <img class="profile-image-img" src={{proPic}} />
+        </div>
+        <div class="profile-snapshot-body flex-column">
+          <div class="profile-snapshot-stats-row flex-row">
+            <div class="profile-snapshot-stat">135 followers</div>
+            <div class="profile-snapshot-stat">24 quotes</div>
+          </div>
+          <div class="profile-snapshot-pinned-quote">
+            "The journey of a thousand miles begins with a single step."
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="container-center flex-column">
+      <div class="feed flex-column">
+        {{#each quotes}}
+        <div class="quote-item flex-column">
+          <div class="quote-text">
+            "{{quote_body}}"
+          </div>
+          <div class="quote-author">{{quote_speaker}}</div>
+          <div class="quote-attributes">
+            <i class="fa fa-eye" aria-hidden="true"></i>
+            <i class="fa fa-heart" aria-hidden="true"></i>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+    </section>
+    <section class="container-right flex-column">
+      <div class="groups-snapshot flex-column">
+        <div class="groups-snapshot-head">Groups</div>
+        <div class="group-snapshot-item flex-row">
+          <div class="group-snapshot-item-image flex-column">
+            <img class="group-image-img" src="assets/images/switz.jpg" />
+          </div>
+          <div class="group-snapshot-item-title">Swiss miss</div>
+          <div class="group-snapshot-item-users">
+            <i class="fa fa-users" aria-hidden="true"></i>
+          </div>
+        </div>
+        <div class="group-snapshot-item flex-row">
+          <div class="group-snapshot-item-image flex-column">
+            <img class="group-image-img" src="assets/images/carson.jpg" />
+          </div>
+          <div class="group-snapshot-item-title">Four Horsemen</div>
+          <div class="group-snapshot-item-users">
+            <i class="fa fa-users" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>
