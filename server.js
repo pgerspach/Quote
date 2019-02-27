@@ -28,6 +28,8 @@ const Firebase = {firebase:firebase,admin:adminFb, token:null};
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
 
 // Static directory
 let exphbs = require("express-handlebars");

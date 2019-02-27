@@ -34,11 +34,11 @@ module.exports = {
         });
     });
   },
-  currentUser: (Firebase) =>{
+  currentUser: (Firebase, idToken) =>{
     return new Promise((resolve, reject) => {
       Firebase.admin
         .auth()
-        .verifyIdToken(Firebase.token)
+        .verifyIdToken(idToken)
         .then(decodedToken => {
           Firebase.admin
             .auth()

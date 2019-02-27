@@ -5,19 +5,21 @@ module.exports = function(router, Firebase) {
   const inflections = require("../quote_modules/inflections.js");
 
   router.get("/home", (req, res) => {
-    loadHome(res);
+    loadHome(req,res);
   });
 
   router.get("/", (req, res) => {
-    loadHome(res);
+    loadHome(req,res);
   });
 
-  function loadHome(res) {
-    if(Firebase.token === null){
+  function loadHome(req,res) {
+    if(!req.cookies["quillo_token"]){
+      console.log(req.cookies);
       res.render("login", {});
     }
     else {
-      fborm.currentUser(Firebase).then(({statusCode,userRecord})=>{
+
+      fborm.currentUser(Firebase, req.cookies.quillo_token).then(({statusCode,userRecord})=>{
         let currentUserId=userRecord.uid;
 
         db.Friendship.findAll({

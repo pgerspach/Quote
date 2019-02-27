@@ -1,6 +1,8 @@
 module.exports = function(router, Firebase) {
   const db = require("../models");
   const fborm = require("../firebase/orm/orm.js");
+  const inflections = require("../quote_modules/inflections.js");
+
   // Listen for post request for google sign in
   router.post("/auth/google", (req, res) => {
     fborm
@@ -9,10 +11,10 @@ module.exports = function(router, Firebase) {
         if (data.statusCode === 404) {
           throw data.error;
         }
+        res.cookie("quillo_token", data.idToken, {maxAge:40000,httpOnly:true});
 
-        Firebase.token = data.idToken;
         fborm
-          .currentUser(Firebase)
+          .currentUser(Firebase, data.idToken)
           .then(({ statusCode, userRecord }) => {
             if (typeof userRecord === "object") {
               loadData(statusCode, userRecord);
@@ -95,5 +97,8 @@ module.exports = function(router, Firebase) {
         });
     }
   });
+
+
+
   return router;
 };
