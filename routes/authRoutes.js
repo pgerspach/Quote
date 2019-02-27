@@ -13,7 +13,8 @@ module.exports = function(router, Firebase) {
         }
         res.cookie("quillo_token", data.idToken, {
           maxAge: 300000,
-          httpOnly: true
+          httpOnly: true,
+          secure:true
         });
 
         fborm
