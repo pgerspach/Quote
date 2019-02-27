@@ -5,10 +5,17 @@ module.exports = function(router, Firebase) {
   router.post("/auth/google", (req, res) => {
 
     fborm.signIn(Firebase, req.body.token).then(data=>{
+      if(data.statusCode === 404){
+        throw data.error;
+      }
+
       Firebase.token = data.idToken;
       fborm // if successul, get id token and then decoded token to use as userId in mySql
       .currentUser(Firebase)
       .then(({statusCode, userRecord}) => {
+        if(statusCode === 404){
+          throw userRecord;
+        }
         let userId = userRecord.uid;
         db.Users.findAll({
           where: {
@@ -69,8 +76,10 @@ module.exports = function(router, Firebase) {
         // ...
       }).catch(error=>{
         throw error;
-      });;
-    })
+      });
+    }).catch(error=>{
+      throw error;
+    });
     // Try to sign in with token from client
     
   });

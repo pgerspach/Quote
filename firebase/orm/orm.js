@@ -18,12 +18,18 @@ module.exports = {
                 statusCode: 200,
                 idToken: idToken
               });
+            })
+            .catch(function(error) {
+              resolve({
+                statusCode: 404,
+                error: error
+              });
             });
         })
         .catch(function(error) {
           resolve({
             statusCode: 404,
-            data: error
+            error: error
           });
         });
     });
@@ -39,7 +45,7 @@ module.exports = {
             .getUser(decodedToken.uid)
             .then(userRecord => {
               resolve({
-                statusCode: 404,
+                statusCode: 200,
                 userRecord: userRecord
               });
             })
