@@ -11,22 +11,15 @@ module.exports = function(router, Firebase) {
         if (data.statusCode === 404) {
           throw data.error;
         }
-        res.cookie("quillo_token", data.idToken, {maxAge:40000,httpOnly:true});
+        res.cookie("quillo_token", data.idToken, {maxAge:300000,httpOnly:true});
 
         fborm
           .currentUser(Firebase, data.idToken)
           .then(({ statusCode, userRecord }) => {
-            if (typeof userRecord === "object") {
               loadData(statusCode, userRecord);
-            }
-            // ...
           })
           .catch(err => {
-            if (typeof err === "object") {
-              loadData(statusCode, err);
-            } else {
               res.send(err);
-            }
           });
       })
       .catch(err => {
@@ -89,7 +82,7 @@ module.exports = function(router, Firebase) {
                 res.send(err);
               });
           } else {
-            res.sendStatus(statusCode);
+            res.send("OK");
           }
         })
         .catch(err => {
