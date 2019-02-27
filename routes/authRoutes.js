@@ -13,7 +13,19 @@ module.exports = function(router, Firebase) {
       fborm 
       .currentUser(Firebase)
       .then(({statusCode, userRecord}) => {
-        let userId = userRecord.uid;
+        if(typeof userRecord === "object"){
+          loadData(statusCode, userRecord);
+        }
+        // ...
+      }).catch(err=>{
+       res.send(err);
+      });
+    }).catch(err=>{
+      res.send(err);
+    });
+    // Try to sign in with token from client
+    function loadData(statusCode, userRecord){
+      let userId = userRecord.uid;
         db.Users.findAll({
           where: {
             id: userId // user Id from firebase token
@@ -70,15 +82,7 @@ module.exports = function(router, Firebase) {
         }).catch(err=>{
           res.send(err);
         });
-        // ...
-      }).catch(err=>{
-       res.send(err);
-      });
-    }).catch(err=>{
-      res.send(err);
-    });
-    // Try to sign in with token from client
-    
+    }
   });
   return router;
 };
