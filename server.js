@@ -4,6 +4,8 @@ require("dotenv").config();
 // Sets up the Express App
 // =============================================================
 let app = express();
+var session = require('express-session');
+
 let PORT = process.env.PORT || 8080;
 
 // Requiring our models for syncing
@@ -24,12 +26,13 @@ let config = {
 firebase.initializeApp(config);
 
 
-const Firebase = {firebase:firebase,admin:adminFb, token:null};
+const Firebase = {firebase:firebase,admin:adminFb};
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
+// app.use(session({secret: "MySecret"}));
 
 // Static directory
 let exphbs = require("express-handlebars");

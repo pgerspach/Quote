@@ -9,13 +9,14 @@ module.exports = function(router, Firebase) {
       .signIn(Firebase, req.body.token)
       .then(data => {
         if (data.statusCode === 404) {
+          console.log("Throwingerrorhere");
           throw data.error;
         }
         res.cookie("quillo_token", data.idToken, {
           maxAge: 300000,
-          httpOnly: true,
-          secure:true
+          httpOnly: true
         });
+        // req.session.idToken = data.idToken;
 
         fborm
           .currentUser(Firebase, data.idToken)
