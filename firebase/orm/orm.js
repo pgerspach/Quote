@@ -52,14 +52,14 @@ module.exports = {
             .catch(error => {
               reject({
                 statusCode: 404,
-                data: error
+                error: error
               });
             });
         })
         .catch(error => {
           reject({
             statusCode: 404,
-            data: error
+            error: error
           });
         });
     });
