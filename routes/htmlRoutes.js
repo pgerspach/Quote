@@ -13,12 +13,13 @@ module.exports = function(router, Firebase) {
   });
 
   function loadHome(req,res) {
+
     if(!req.cookies["quillo_token"]){
       console.log(req.cookies);
       res.render("login", {});
     }
     else {
-
+      console.log("GETTING HOMEE");
       fborm.currentUser(Firebase, req.cookies.quillo_token).then(({statusCode,userRecord})=>{
         let currentUserId=userRecord.uid;
 

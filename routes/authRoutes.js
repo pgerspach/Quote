@@ -11,15 +11,18 @@ module.exports = function(router, Firebase) {
         if (data.statusCode === 404) {
           throw data.error;
         }
-        res.cookie("quillo_token", data.idToken, {maxAge:300000,httpOnly:true});
+        res.cookie("quillo_token", data.idToken, {
+          maxAge: 300000,
+          httpOnly: true
+        });
 
         fborm
           .currentUser(Firebase, data.idToken)
           .then(({ statusCode, userRecord }) => {
-              loadData(statusCode, userRecord);
+            loadData(statusCode, userRecord);
           })
           .catch(err => {
-              res.send(err);
+            res.send(err);
           });
       })
       .catch(err => {
@@ -90,8 +93,6 @@ module.exports = function(router, Firebase) {
         });
     }
   });
-
-
 
   return router;
 };

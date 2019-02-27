@@ -1,8 +1,7 @@
 module.exports = {
   signIn: (Firebase, token) =>{
     var credential = Firebase.firebase.auth.GoogleAuthProvider.credential(
-      // get user credential from token provided by client
-      token
+            token
     );
     return new Promise((resolve, reject) => {
       Firebase.firebase
