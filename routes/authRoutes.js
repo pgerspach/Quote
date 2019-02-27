@@ -13,9 +13,6 @@ module.exports = function(router, Firebase) {
       fborm // if successul, get id token and then decoded token to use as userId in mySql
       .currentUser(Firebase)
       .then(({statusCode, userRecord}) => {
-        if(statusCode === 404){
-          throw userRecord;
-        }
         let userId = userRecord.uid;
         db.Users.findAll({
           where: {
@@ -62,23 +59,23 @@ module.exports = function(router, Firebase) {
                   res.send("OK");
                 })
                 .catch(err => {
-                  if (err) throw err;
+                  throw err;
                 });
-            }).catch(error=>{
-              throw error;
+            }).catch(err=>{
+              throw err;
             });
           } else {
             res.sendStatus(statusCode);
           }
-        }).catch(error=>{
-          throw error;
+        }).catch(err=>{
+          throw err;
         });
         // ...
-      }).catch(error=>{
-        throw error;
+      }).catch(err=>{
+        throw err.error;
       });
-    }).catch(error=>{
-      throw error;
+    }).catch(err=>{
+      throw err.error;
     });
     // Try to sign in with token from client
     

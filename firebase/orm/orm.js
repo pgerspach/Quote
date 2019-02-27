@@ -50,14 +50,14 @@ module.exports = {
               });
             })
             .catch(error => {
-              resolve({
+              reject({
                 statusCode: 404,
                 data: error
               });
             });
         })
         .catch(error => {
-          resolve({
+          reject({
             statusCode: 404,
             data: error
           });
