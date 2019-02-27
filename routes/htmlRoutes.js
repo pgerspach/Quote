@@ -14,13 +14,12 @@ module.exports = function(router, Firebase) {
 
   function loadHome(req,res) {
 
-    if(!req.cookies["quillo_token"]){
-      console.log(req.cookies);
+    if(!req.session.idToken){
+      console.log(req.session.idToken);
       res.render("login", {});
     }
     else {
-      console.log("GETTING HOMEE");
-      fborm.currentUser(Firebase, req.cookies.quillo_token).then(({statusCode,userRecord})=>{
+      fborm.currentUser(Firebase, req.session.idToken).then(({statusCode,userRecord})=>{
         let currentUserId=userRecord.uid;
 
         db.Friendship.findAll({

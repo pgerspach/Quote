@@ -1,7 +1,6 @@
 let docReadyPromise = new Promise((resolve, reject)=>{
   $(document).ready(()=>{
     resolve((token)=>{
-      console.log(token);
       $.post("/auth/google", { token: token }, response => {
         if(response === "OK"){
           window.location.href = "/home";
@@ -11,7 +10,7 @@ let docReadyPromise = new Promise((resolve, reject)=>{
         }
       });
     })
-    
+
     if(false){
       reject();
     }

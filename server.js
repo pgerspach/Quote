@@ -32,7 +32,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
-// app.use(session({secret: "MySecret"}));
+app.use(session({secret: "MySecret"}));
 
 // Static directory
 let exphbs = require("express-handlebars");

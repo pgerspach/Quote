@@ -12,14 +12,14 @@ module.exports = function(router, Firebase) {
           console.log("Throwingerrorhere");
           throw data.error;
         }
-        res.cookie("quillo_token", data.idToken, {
-          maxAge: 300000,
-          httpOnly: true
-        });
-        // req.session.idToken = data.idToken;
+        // res.cookie("quillo_token", data.idToken, {
+        //   maxAge: 300000,
+        //   httpOnly: true
+        // });
+        req.session.idToken = data.idToken;
 
         fborm
-          .currentUser(Firebase, data.idToken)
+          .currentUser(Firebase, req.session.idToken)
           .then(({ statusCode, userRecord }) => {
             loadData(statusCode, userRecord);
           })
