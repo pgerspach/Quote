@@ -11,6 +11,10 @@ let docReadyPromise = new Promise((resolve, reject)=>{
         }
       });
     })
+    
+    if(false){
+      reject();
+    }
   })
 });
 
