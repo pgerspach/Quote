@@ -52,7 +52,7 @@ module.exports = {
             .catch(error => {
               reject({
                 statusCode: 404,
-                error: "C"
+                error: decodedToken
               });
             });
         })
