@@ -59,23 +59,23 @@ module.exports = function(router, Firebase) {
                   res.send("OK");
                 })
                 .catch(err => {
-                  throw err;
+                  res.send(err);
                 });
             }).catch(err=>{
-              throw err;
+              res.send(err);
             });
           } else {
             res.sendStatus(statusCode);
           }
         }).catch(err=>{
-          throw err;
+          res.send(err);
         });
         // ...
       }).catch(err=>{
-        throw err.error;
+       res.send(err);
       });
     }).catch(err=>{
-      throw err.error;
+      res.send(err);
     });
     // Try to sign in with token from client
     

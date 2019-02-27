@@ -6,6 +6,8 @@ let docReadyPromise = new Promise((resolve, reject)=>{
         if(response === "OK"){
           window.location.href = "/home";
           return false;
+        }else{
+          console.log(response);
         }
       });
     })
