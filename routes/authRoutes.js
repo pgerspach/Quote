@@ -21,7 +21,7 @@ module.exports = function(router, Firebase) {
           })
           .catch(err => {
             if (typeof err === "object") {
-              loadData(statusCode, userRecord);
+              loadData(statusCode, err);
             } else {
               res.send(err);
             }
