@@ -22,10 +22,14 @@ module.exports = function(router, Firebase) {
             loadData(statusCode, userRecord);
           })
           .catch(err => {
+            console.log("mistake E");
+
             res.send(err);
           });
       })
       .catch(err => {
+        console.log("mistake D");
+
         res.send(err);
       });
     // Try to sign in with token from client
@@ -78,10 +82,13 @@ module.exports = function(router, Firebase) {
                     res.send("OK");
                   })
                   .catch(err => {
+                    console.log("mistake A");
+
                     res.send(err);
                   });
               })
               .catch(err => {
+                console.log("mistake B");
                 res.send(err);
               });
           } else {
@@ -89,6 +96,8 @@ module.exports = function(router, Firebase) {
           }
         })
         .catch(err => {
+          console.log("mistake C");
+
           res.send(err);
         });
     }
