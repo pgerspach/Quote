@@ -19,17 +19,17 @@ module.exports = {
                 idToken: idToken
               });
             })
-            .catch(function(error) {
+            .catch((error) =>{
               reject({
                 statusCode: 404,
-                error: error
+                error: "A"
               });
             });
         })
-        .catch(function(error) {
+        .catch((error)=> {
           reject({
             statusCode: 404,
-            error: error
+            error: "B"
           });
         });
     });
@@ -52,14 +52,14 @@ module.exports = {
             .catch(error => {
               reject({
                 statusCode: 404,
-                error: error
+                error: "C"
               });
             });
         })
         .catch(error => {
           reject({
             statusCode: 404,
-            error: error
+            error: "D"
           });
         });
     });
