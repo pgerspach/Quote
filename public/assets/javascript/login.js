@@ -2,7 +2,6 @@ let docReadyPromise = new Promise((resolve, reject)=>{
   $(document).ready(()=>{
     resolve((token)=>{
       $.post("/auth/google", { token: token }, response => {
-        console.log(response);
         if(response === "OK"){
           window.location.href = "/home";
           return false;

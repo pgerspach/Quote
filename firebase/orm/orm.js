@@ -1,5 +1,5 @@
 module.exports = {
-  signIn: function(Firebase, token) {
+  signIn: (Firebase, token) =>{
     var credential = Firebase.firebase.auth.GoogleAuthProvider.credential(
       // get user credential from token provided by client
       token
@@ -34,7 +34,7 @@ module.exports = {
         });
     });
   },
-  currentUser: function(Firebase) {
+  currentUser: (Firebase) =>{
     return new Promise((resolve, reject) => {
       Firebase.admin
         .auth()
