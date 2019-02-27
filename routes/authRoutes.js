@@ -3,24 +3,13 @@ module.exports = function(router, Firebase) {
   const fborm = require("../firebase/orm/orm.js");
   // Listen for post request for google sign in
   router.post("/auth/google", (req, res) => {
-    // Firebase.auth().onAuthStateChanged(function(user) {
-    //   // Listen for change in auth status...
-    //   if (user) {
-    //     // User is signed in.
-    //     console.log("User in");
-    //   } else {
-    //     // No user is signed in.
-    //     console.log("User Not");
-    //   }
-    // });
-    console.log(req.body.token);
+
     fborm.signIn(Firebase, req.body.token).then(data=>{
       Firebase.token = data.idToken;
       fborm // if successul, get id token and then decoded token to use as userId in mySql
       .currentUser(Firebase)
       .then(({statusCode, userRecord}) => {
         let userId = userRecord.uid;
-        console.log(userRecord);
         db.Users.findAll({
           where: {
             id: userId // user Id from firebase token
@@ -35,7 +24,6 @@ module.exports = function(router, Firebase) {
               name: newUser,
               proPic: photoURL
             }).then(result => {
-              console.log("Created User: " + newUser);
               db.Friendship.bulkCreate([
                 {
                   uuid_1: userId,
@@ -69,13 +57,19 @@ module.exports = function(router, Firebase) {
                 .catch(err => {
                   if (err) throw err;
                 });
+            }).catch(error=>{
+              throw error;
             });
           } else {
             res.sendStatus(statusCode);
           }
+        }).catch(error=>{
+          throw error;
         });
         // ...
-      });
+      }).catch(error=>{
+        throw error;
+      });;
     })
     // Try to sign in with token from client
     

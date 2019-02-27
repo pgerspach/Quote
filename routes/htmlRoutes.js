@@ -18,7 +18,6 @@ module.exports = function(router, Firebase) {
     }
     else {
       fborm.currentUser(Firebase).then(({statusCode,userRecord})=>{
-        console.log("HI");
         let currentUserId=userRecord.uid;
 
         db.Friendship.findAll({
