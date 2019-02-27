@@ -20,14 +20,14 @@ module.exports = {
               });
             })
             .catch(function(error) {
-              resolve({
+              reject({
                 statusCode: 404,
                 error: error
               });
             });
         })
         .catch(function(error) {
-          resolve({
+          reject({
             statusCode: 404,
             error: error
           });

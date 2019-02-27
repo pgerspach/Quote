@@ -10,7 +10,7 @@ module.exports = function(router, Firebase) {
       }
 
       Firebase.token = data.idToken;
-      fborm // if successul, get id token and then decoded token to use as userId in mySql
+      fborm 
       .currentUser(Firebase)
       .then(({statusCode, userRecord}) => {
         let userId = userRecord.uid;
